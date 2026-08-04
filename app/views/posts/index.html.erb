@@ -1,0 +1,21 @@
+<% content_for :title, "Kevin Skilton" %>
+
+<div class="space-y-8">
+  <% if @posts.empty? %>
+    <p class="text-gray-500">Nothing published yet — check back soon.</p>
+  <% else %>
+    <% @posts.each do |post| %>
+      <article>
+        <h2 class="text-xl font-semibold">
+          <%= link_to post.title, post_path(post), class: "hover:text-gray-600" %>
+        </h2>
+        <p class="text-sm text-gray-500">
+          <%= post.published_at.strftime("%B %-d, %Y") %>
+          <% if post.category.present? %>
+            &middot; <%= post.category %>
+          <% end %>
+        </p>
+      </article>
+    <% end %>
+  <% end %>
+</div>

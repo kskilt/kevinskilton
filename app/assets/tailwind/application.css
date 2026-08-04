@@ -1,1 +1,46 @@
 @import "tailwindcss";
+
+/* Minimal styling for Markdown-rendered post bodies. Kept as plain CSS rather
+   than pulling in the Tailwind Typography plugin, to avoid an extra JS/build
+   dependency for what a handful of rules can cover. */
+.rendered-body h1, .rendered-body h2, .rendered-body h3 {
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.rendered-body p, .rendered-body ul, .rendered-body ol {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+.rendered-body ul, .rendered-body ol {
+  padding-left: 1.5em;
+}
+.rendered-body ul { list-style: disc; }
+.rendered-body ol { list-style: decimal; }
+.rendered-body a { color: #2563eb; text-decoration: underline; }
+.rendered-body code {
+  background: #f3f4f6;
+  padding: 0.15em 0.35em;
+  border-radius: 0.25em;
+  font-size: 0.9em;
+}
+.rendered-body pre {
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 1em;
+  border-radius: 0.5em;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+.rendered-body pre code {
+  background: none;
+  padding: 0;
+}
+.rendered-body table {
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+.rendered-body th, .rendered-body td {
+  border: 1px solid #d1d5db;
+  padding: 0.4em 0.8em;
+}
