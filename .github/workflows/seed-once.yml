@@ -10,6 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl ssh console -a kevinskilton -C "bin/rails db:seed"
+      - run: |
+          MACHINE_ID=$(flyctl machines list -a kevinskilton --json | jq -r '.[0].id')
+          flyctl machine start "$MACHINE_ID" -a kevinskilton || true
+          sleep 5
+          flyctl ssh console -a kevinskilton -C "bin/rails db:seed"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
