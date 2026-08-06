@@ -1,0 +1,34 @@
+<% content_for :title, "Kevin Skilton" %>
+
+<section class="hero-panel">
+  <p class="section-kicker">Kevin Skilton</p>
+  <h1 class="hero-title">Shipping ideas, code, and a better dev experience.</h1>
+  <p class="hero-copy">This site is a record of the tools, patterns, and launches I care about. Read the blog for project writeups, product lessons, and the implementation details behind what I build.</p>
+
+  <div class="hero-badges">
+    <%= link_to "Explore the blog", blog_path, class: "badge badge-cyan" %>
+    <span class="badge badge-slate">Built with Rails, Hotwire, and a bit of markdown.</span>
+  </div>
+</section>
+
+<% if @recent_posts.any? %>
+  <section class="content-panel">
+    <div class="content-stack">
+      <p class="section-kicker">Latest posts</p>
+      <h2 class="panel-title">Recent articles</h2>
+    </div>
+
+    <div class="post-grid">
+      <% @recent_posts.each do |post| %>
+        <article class="card-panel">
+          <div class="hero-badges">
+            <h3 class="card-title"><%= link_to post.title, post_path(post) %></h3>
+            <%= render_technology_pills(post) %>
+          </div>
+          <p class="card-copy"><%= post.published_at.strftime("%B %-d, %Y") %></p>
+          <p class="card-copy mt-3"><%= truncate(strip_tags(post.rendered_body), length: 140) %></p>
+        </article>
+      <% end %>
+    </div>
+  </section>
+<% end %>

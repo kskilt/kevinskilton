@@ -6,3 +6,39 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+AllCops:
+  NewCops: enable
+
+plugins:
+  - rubocop-rspec
+
+require:
+  - ./lib/rubocop/cop/custom/technology_tags.rb
+
+Custom/TechnologyTags:
+  Enabled: true
+
+RSpec/VariableDefinition:
+  Enabled: true
+
+RSpec/ContainExactly:
+  Enabled: true
+
+RSpec/BeEq:
+  Enabled: true
+
+RSpec/SharedExamples:
+  Enabled: true
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false

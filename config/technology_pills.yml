@@ -1,0 +1,18 @@
+ruby:
+  label: "Ruby"
+  classes: "bg-red-100 text-red-700 ring-1 ring-red-200"
+rails:
+  label: "Ruby on Rails"
+  classes: "bg-rose-100 text-rose-700 ring-1 ring-rose-200"
+javascript:
+  label: "JavaScript"
+  classes: "bg-yellow-100 text-yellow-900 ring-1 ring-yellow-200"
+react:
+  label: "React"
+  classes: "bg-orange-100 text-orange-800 ring-1 ring-orange-200"
+rspec:
+  label: "RSpec"
+  classes: "bg-violet-100 text-violet-800 ring-1 ring-violet-200"
+turbo:
+  label: "Turbo"
+  classes: "bg-sky-100 text-sky-800 ring-1 ring-sky-200"

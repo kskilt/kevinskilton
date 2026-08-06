@@ -1,15 +1,25 @@
-<% content_for :title, "Kevin Skilton" %>
+<% content_for :title, "Blog — Kevin Skilton" %>
 
-<div class="space-y-8">
+<section class="hero-panel">
+  <div class="hero-badges">
+    <p class="section-kicker">Blog</p>
+  </div>
+  <h1 class="hero-title">Recent thinking and shipping notes.</h1>
+  <p class="hero-copy">Browse the latest posts about software, product decisions, and the stack behind what I build.</p>
+</section>
+
+<div class="content-stack">
   <% if @posts.empty? %>
-    <p class="text-gray-500">Nothing published yet — check back soon.</p>
+    <p class="card-panel">Nothing published yet — check back soon.</p>
   <% else %>
     <% @posts.each do |post| %>
-      <article>
-        <h2 class="text-xl font-semibold">
-          <%= link_to post.title, post_path(post), class: "hover:text-gray-600" %>
-        </h2>
-        <p class="text-sm text-gray-500">
+      <article class="card-panel">
+        <div class="hero-badges">
+          <h2 class="card-title"><%= link_to post.title, post_path(post) %></h2>
+          <%= render_technology_pills(post) %>
+        </div>
+
+        <p class="card-copy">
           <%= post.published_at.strftime("%B %-d, %Y") %>
           <% if post.category.present? %>
             &middot; <%= post.category %>

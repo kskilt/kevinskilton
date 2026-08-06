@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_03_193936) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_05_120000) do
   create_table "posts", force: :cascade do |t|
     t.text "body", null: false
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "published_at"
     t.string "slug", null: false
+    t.integer "status", default: 0, null: false
+    t.json "technology_tags", default: [], null: false
     t.string "title", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_posts_on_slug", unique: true

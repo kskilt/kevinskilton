@@ -1,10 +1,297 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+:root {
+  color-scheme: dark;
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #020617 0%, #07111f 55%, #0f172a 100%);
+  color: #f8fafc;
+  line-height: 1.6;
+}
+
+body.site-shell {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(2, 6, 23, 0.82);
+  backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.site-header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.site-brand {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.site-nav a:hover {
+  color: #67e8f9;
+}
+
+.page-content {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.hero-panel,
+.content-panel {
+  border-radius: 2rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(2, 6, 23, 0.24);
+}
+
+.hero-panel {
+  background: linear-gradient(135deg, #111827 0%, #0f172a 45%, #172554 100%);
+  color: #f8fafc;
+}
+
+.content-panel {
+  background: rgba(2, 6, 23, 0.95);
+}
+
+.hero-badges,
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.badge,
+.pill,
+.step-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.badge-cyan,
+.pill-cyan,
+.step-cyan {
+  background: rgba(34, 211, 238, 0.16);
+  color: #7dd3fc;
+}
+
+.badge-slate {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+}
+
+.badge-fuchsia,
+.pill-fuchsia,
+.step-fuchsia {
+  background: rgba(217, 70, 239, 0.16);
+  color: #f0abfc;
+}
+
+.pill-emerald,
+.step-emerald {
+  background: rgba(16, 185, 129, 0.16);
+  color: #86efac;
+}
+
+.step-amber {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fde68a;
+}
+
+.section-kicker,
+.card-kicker {
+  margin: 0 0 0.35rem;
+  color: #67e8f9;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.hero-title,
+.panel-title {
+  font-size: clamp(2rem, 3vw, 2.85rem);
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+  color: #ffffff;
+}
+
+.hero-copy,
+.panel-copy,
+.card-copy,
+.note-box p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.4rem;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.card-panel {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.45rem;
+  padding: 1.2rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.accent-card {
+  border-color: rgba(103, 232, 249, 0.26);
+  box-shadow: 0 16px 40px rgba(6, 182, 212, 0.16);
+}
+
+.card-title {
+  margin: 0.4rem 0 0.45rem;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.content-stack {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.flow-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.small-card {
+  min-height: 100%;
+}
+
+.note-box {
+  margin: 1.2rem 0 1.35rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.1rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.note-title {
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.info-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.post-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.rendered-body h1,
+.rendered-body h2,
+.rendered-body h3 {
+  margin: 1.4rem 0 0.6rem;
+  color: #ffffff;
+}
+
+.rendered-body p,
+.rendered-body ul,
+.rendered-body ol {
+  margin: 0 0 1rem;
+  color: #cbd5e1;
+}
+
+.rendered-body ul,
+.rendered-body ol {
+  padding-left: 1.25rem;
+}
+
+.rendered-body a {
+  color: #67e8f9;
+  text-decoration: underline;
+}
+
+.rendered-body pre {
+  background: rgba(15, 23, 42, 0.95);
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 0.9rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.rendered-body code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.35rem;
+}
+
+@media (max-width: 900px) {
+  .hero-grid,
+  .flow-grid,
+  .info-grid,
+  .post-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header-inner,
+  .page-content,
+  .hero-panel,
+  .content-panel {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .site-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

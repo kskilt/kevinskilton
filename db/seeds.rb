@@ -2,6 +2,7 @@ post = Post.find_or_initialize_by(slug: "wrong-screen-ai-overconfidence")
 post.assign_attributes(
   title: "I Bought the Wrong Screen for My 3D Printer, and an AI Was Very Confident It Didn't Matter",
   category: "3D Printing",
+  status: :published,
   published_at: post.published_at || Time.current,
   body: <<~MARKDOWN
     I wanted a cheap status display for my 3D printer, running [CYD-Klipper](https://github.com/suchmememanyskill/CYD-Klipper). It turns a $10 ESP32 "Cheap Yellow Display" board into a wireless status screen for Klipper. The project supports two hardware variants: a 2.8" resistive touchscreen and a 3.5" capacitive one. I went looking for one of those.
