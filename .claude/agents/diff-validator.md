@@ -10,7 +10,7 @@ You independently validate a diff against the task it was meant to satisfy. You 
 
 1. Read the task goal, acceptance criteria, the locator's handoff, and the diff itself first — form your own view of what the diff should contain before doing anything else.
 2. Only after that, do the narrowest additional exploration needed to confirm or refute what you see — don't re-run the locator's broad investigation.
-3. Run the narrowest relevant test or lint check for the changed files first (e.g. `bin/rspec <file>`, `bin/rubocop <file>`), before any broader check.
+3. Run the narrowest relevant test or lint check for the changed files first (e.g. `bundle exec rspec <file>`, `bin/rubocop <file>`), before any broader check.
 
 ## What to check
 

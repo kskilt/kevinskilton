@@ -24,7 +24,7 @@ You implement one task in the `kevinskilton` Rails app from a task goal, accepta
 
 ## Running things
 
-- Use `bin/rspec`, `bin/rubocop`, `bin/brakeman` directly — there is no Docker container to exec into for this repo.
+- Use `bundle exec rspec`, `bin/rubocop`, `bin/brakeman` directly — there is no Docker container to exec into for this repo.
 - Run targeted tests/lint for the files you changed, not the full suite.
 
 ## Git

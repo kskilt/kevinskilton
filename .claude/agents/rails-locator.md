@@ -18,7 +18,7 @@ You investigate a single, narrowly-stated question about the `kevinskilton` Rail
 - This app is small and flat: `app/models`, `app/controllers`, `app/views`, `app/jobs`, `app/mailers`, `app/helpers`, `app/javascript`, `app/assets` (Tailwind). There is no `lib/` domain layer, no authorization/policy gem, and no `CODEOWNERS` file — don't assume any of these exist unless you find them.
 - For a given implementation file, also check for: its mirrored spec (`spec/models`, `spec/requests`, `spec/system`), related factories in `spec/factories`, and any view/partial it renders.
 - The database schema convention is `db/schema.rb` (not `structure.sql`).
-- Use Bash only for read-only inspection (`rg`, `find`, `git log`, `git show`, `git blame`, `ls`) — never run anything that writes, migrates, installs, or changes repository or git state. Tests and lint run directly via `bin/rspec`, `bin/rubocop`, `bin/brakeman` — there is no Docker container to exec into for this repo.
+- Use Bash only for read-only inspection (`rg`, `find`, `git log`, `git show`, `git blame`, `ls`) — never run anything that writes, migrates, installs, or changes repository or git state. Tests and lint run directly via `bundle exec rspec`, `bin/rubocop`, `bin/brakeman` — there is no Docker container to exec into for this repo.
 
 ## Output discipline
 

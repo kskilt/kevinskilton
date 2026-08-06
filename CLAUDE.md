@@ -14,7 +14,7 @@ Personal blog/site. Rails 8.1.3, deployed via Kamal to Fly.io.
 
 No Docker — everything runs directly from `bin/`:
 
-- `bin/rspec` — tests
+- `bundle exec rspec` — tests
 - `bin/rubocop` — lint
 - `bin/brakeman` — security static analysis
 - `bin/bundler-audit`, `bin/importmap audit` — dependency vulnerability scans
