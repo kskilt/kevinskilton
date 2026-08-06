@@ -1,0 +1,118 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
+require "date"
+require "fileutils"
+
+ROOT = File.expand_path("..", __dir__)
+CONTEXT_DIR = File.join(ROOT, "docs", "agent-context")
+DECISIONS_DIR = File.join(CONTEXT_DIR, "decisions")
+TASKS_DIR = File.join(CONTEXT_DIR, "tasks")
+INDEX_FILE = File.join(CONTEXT_DIR, "INDEX.md")
+
+def relative(path)
+  path.sub("#{ROOT}/", "")
+end
+
+def slugify(title)
+  title.downcase.gsub(/[^a-z0-9]+/, "-").gsub(/\A-+|-+\z/, "")
+end
+
+def next_decision_number
+  existing = Dir.glob(File.join(DECISIONS_DIR, "[0-9][0-9][0-9][0-9]-*.md"))
+  numbers = existing.map { |f| File.basename(f)[0, 4].to_i }
+  (numbers.max || 0) + 1
+end
+
+def append_index(section, line)
+  content = File.read(INDEX_FILE)
+  heading = /^## #{Regexp.escape(section)}$/
+  match = content.match(heading)
+  raise "INDEX.md is missing a \"## #{section}\" heading" unless match
+
+  body_start = match.end(0)
+  next_heading = content.match(/^## /, body_start)
+  body_end = next_heading ? next_heading.begin(0) : content.length
+
+  existing = content[body_start...body_end].lines.map(&:strip).select { |l| l.start_with?("- ") }
+  entries = existing + ["- #{line}"]
+  trailing = next_heading ? "\n\n" : "\n"
+  new_body = "\n\n#{entries.join("\n")}#{trailing}"
+
+  File.write(INDEX_FILE, content[0...body_start] + new_body + content[body_end..])
+end
+
+def new_decision(title)
+  abort "Usage: bin/agent-context new-decision \"Title\"" if title.nil? || title.strip.empty?
+
+  number = next_decision_number
+  padded = format("%04d", number)
+  filename = "#{padded}-#{slugify(title)}.md"
+  path = File.join(DECISIONS_DIR, filename)
+  abort "#{relative(path)} already exists" if File.exist?(path)
+
+  content = File.read(File.join(DECISIONS_DIR, "TEMPLATE.md"))
+                .sub("ADR-XXXX", "ADR-#{padded}")
+                .sub("<Title>", title)
+                .sub("YYYY-MM-DD", Date.today.iso8601)
+  File.write(path, content)
+  append_index("Decisions", "[ADR-#{padded}: #{title}](decisions/#{filename})")
+
+  puts "Created #{relative(path)}"
+  puts "Updated #{relative(INDEX_FILE)}"
+end
+
+def new_task(title)
+  abort "Usage: bin/agent-context new-task \"Title\"" if title.nil? || title.strip.empty?
+
+  filename = "#{slugify(title)}.md"
+  path = File.join(TASKS_DIR, filename)
+  abort "#{relative(path)} already exists" if File.exist?(path)
+
+  File.write(path, <<~MD)
+    # #{title}
+
+    - **Started:** #{Date.today.iso8601}
+    - **Status:** in progress
+
+    ## Notes
+
+    <!-- locator/implementer findings, decisions made mid-task, anything worth persisting across sessions -->
+
+    ## Disposition
+
+    <!-- fill in at task completion: delete, reset, or retain -->
+  MD
+  append_index("Active task records", "[#{title}](tasks/#{filename})")
+
+  puts "Created #{relative(path)}"
+  puts "Updated #{relative(INDEX_FILE)}"
+end
+
+def list
+  puts File.read(INDEX_FILE)
+end
+
+def usage
+  <<~TXT
+    Usage:
+      bin/agent-context list                    # print docs/agent-context/INDEX.md
+      bin/agent-context new-decision "Title"     # scaffold a new ADR + index entry
+      bin/agent-context new-task "Title"         # scaffold a new task record + index entry
+  TXT
+end
+
+command, *rest = ARGV
+title = rest.join(" ")
+
+case command
+when "new-decision" then new_decision(title)
+when "new-task" then new_task(title)
+when "list", nil then list
+else
+  warn usage
+  exit 1
+end
