@@ -16,6 +16,6 @@ RSpec.describe "Pages", type: :request do
     expect(response).to be_successful
     expect(response.body).to include("About Kevin")
     expect(response.body).to include("linkedin.com/in/kskilt")
-    expect(response.body).to include("I spend my time shaping thoughtful code")
+    expect(response.body).to include("rather verify something works than trust that it sounds like it does")
   end
 end

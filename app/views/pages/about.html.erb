@@ -2,60 +2,74 @@
 
 <section class="hero-panel">
   <p class="section-kicker">About Kevin</p>
-  <h1 class="hero-title">A builder who cares about how products feel, not just how they work.</h1>
-  <p class="hero-copy">I spend my time shaping thoughtful code, polishing user-facing workflows, and making sure the work lands with clarity and confidence.</p>
+  <h1 class="hero-title">A builder who'd rather verify something works than trust that it sounds like it does.</h1>
+  <p class="hero-copy">I'm a Rails engineer who spends a lot of time on how software actually behaves under real use, not just how it reads in a diff. Outside of work, that same instinct shows up in $10 hardware projects that take a lot longer than they should.</p>
   <div class="hero-badges">
     <a href="https://www.linkedin.com/in/kskilt" target="_blank" rel="noopener" class="badge badge-cyan">LinkedIn</a>
-    <span class="badge badge-slate">Rails, UI, product-driven engineering</span>
-    <span class="badge badge-fuchsia">Creative problem solving</span>
+    <a href="https://github.com/kskilt" target="_blank" rel="noopener" class="badge badge-slate">GitHub</a>
+    <span class="badge badge-fuchsia">Rails · Ruby · product engineering</span>
   </div>
 </section>
 
 <section class="content-panel">
   <div class="content-stack">
-    <p class="section-kicker">How I work</p>
-    <h2 class="panel-title">I care about the story behind the code.</h2>
-    <p class="panel-copy">I’m drawn to problems where the right answer is not only technically correct, but also easy to understand, enjoyable to use, and easy to maintain.</p>
+    <p class="section-kicker">My story</p>
+    <h2 class="panel-title">How I got here</h2>
+    <p class="panel-copy">
+      I have a B.A. in English Literature, not a CS degree — I got into this by way of an employer-run coding bootcamp in 2019, and never left. Since then I've gone from junior developer to Software Engineer II, spent a couple of years establishing how our Rails codebase tests itself, and now build the AI-integration side of the product: model selection, retry and fallback handling, conversation logging — the kind of work where "looks right" and "actually works" are very different bars to clear.
+    </p>
+    <p class="panel-copy">
+      Away from a keyboard, I'm a dad to a toddler and owned by two cats. I'm a fairly serious nerd — D&amp;D, Star Wars, Magic: The Gathering, Arduino and Raspberry Pi projects — and the kind of person who'll spend a weekend turning two broken Game Boys into one working Game Boy Pocket with a color screen. I also yard-sale and thrift-shop on the side, mostly hunting for old tech worth bringing back to life.
+    </p>
+  </div>
+</section>
+
+<section class="content-panel">
+  <div class="content-stack">
+    <p class="section-kicker">What I've learned</p>
+    <h2 class="panel-title">A few things I keep relearning</h2>
+    <p class="panel-copy">
+      Most of this came out of a weekend spent debugging a touchscreen that turned out to be the wrong hardware entirely<% if @debugging_post %> — <%= link_to "the whole story is on the blog", post_path(@debugging_post) %>.<% else %>.<% end %>
+    </p>
   </div>
 
-  <div class="flow-grid">
-    <div class="card-panel">
-      <p class="card-kicker">Design-informed instincts</p>
-      <h3 class="card-title">Polish matters</h3>
-      <p class="card-copy">I pay attention to spacing, typography, and the emotional tone of the interface to help software feel more human.</p>
-    </div>
-    <div class="card-panel">
-      <p class="card-kicker">Product-first thinking</p>
-      <h3 class="card-title">Solve the right problem</h3>
-      <p class="card-copy">I prefer starting with what users actually need, then using the simplest tools to deliver a solid outcome.</p>
-    </div>
-    <div class="card-panel">
-      <p class="card-kicker">Collaborative mindset</p>
-      <h3 class="card-title">Code is a team sport</h3>
-      <p class="card-copy">I enjoy working with designers, PMs, and teammates to turn vague ideas into something useful and reliable.</p>
-    </div>
+  <div class="content-stack">
+    <p class="card-kicker">Verify, don't trust confidence</p>
+    <p class="panel-copy">An AI tool can sound completely certain while being completely wrong. The confidence isn't signal — the only way to know a fix works is to check it against the real thing, not how sure the tool sounds.</p>
   </div>
 
-  <div class="note-box">
-    <div class="note-title">What I enjoy most</div>
-    <p>I like building interfaces that feel deliberate, doing the cleanup work that makes products easier to maintain, and using automation to make everyday developer tasks less painful.</p>
+  <div class="content-stack">
+    <p class="card-kicker">Respect what you're building on top of</p>
+    <p class="panel-copy">When you're contributing to someone else's project, match how they already do things. Showing up with more work for a maintainer to clean up isn't collaboration.</p>
   </div>
 
-  <div class="info-grid">
-    <div class="card-panel">
-      <p class="card-kicker">Skills</p>
-      <h3 class="card-title">Technical craft</h3>
-      <p class="card-copy">Rails, Ruby, modern frontend patterns, markdown-based publishing, and lightweight tooling that moves fast without sacrificing quality.</p>
-    </div>
-    <div class="card-panel">
-      <p class="card-kicker">Character</p>
-      <h3 class="card-title">Curiosity & ownership</h3>
-      <p class="card-copy">I’m driven by the question “how can this be better?” and I’m willing to do the thoughtful work to answer it.</p>
-    </div>
-    <div class="card-panel">
-      <p class="card-kicker">Outside work</p>
-      <h3 class="card-title">Hobbies that matter</h3>
-      <p class="card-copy">I enjoy learning new tools, reading about systems design, and taking on creative side projects that keep my thinking sharp.</p>
-    </div>
+  <div class="content-stack">
+    <p class="card-kicker">The debugging is the job</p>
+    <p class="panel-copy">The fix is rarely the hard part. Reading the actual chip markings, testing one variable at a time, re-checking your own assumptions before blaming the tool — that's the real work, and it's still usually a human's job to do.</p>
+  </div>
+</section>
+
+<section class="content-panel">
+  <div class="content-stack">
+    <p class="section-kicker">Currently</p>
+    <h2 class="panel-title">What I'm focused on</h2>
+  </div>
+
+  <ul class="marker-list">
+    <li>Building and running this site myself — Rails 8 on Fly.io, deployed with Kamal, with a small agent-assisted workflow for locating, implementing, and validating changes before they ship.</li>
+    <li>Running <%= link_to "my CYD-Klipper fork", "https://github.com/kskilt/CYD-Klipper-3.5Resistive", target: "_blank", rel: "noopener" %> daily on my 3D printer, after the debugging weekend that convinced me AI confidence and correctness are two very different things.</li>
+    <li>Building the AI-integration surface at Within3 — a multiturn chatbot with model selection, retry/fallback handling, and conversation logging, from the database schema up.</li>
+  </ul>
+</section>
+
+<section class="content-panel">
+  <div class="content-stack">
+    <p class="section-kicker">Get in touch</p>
+    <h2 class="panel-title">Find me</h2>
+    <p class="panel-copy">
+      <%= link_to "LinkedIn", "https://www.linkedin.com/in/kskilt", target: "_blank", rel: "noopener" %> ·
+      <%= link_to "GitHub", "https://github.com/kskilt", target: "_blank", rel: "noopener" %> ·
+      <%= link_to "the blog", blog_path %>
+    </p>
   </div>
 </section>

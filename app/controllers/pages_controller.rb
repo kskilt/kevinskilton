@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def about
+    @debugging_post = Post.published.find_by(slug: "wrong-screen-ai-overconfidence")
   end
 
   def agent_log
