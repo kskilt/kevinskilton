@@ -24,10 +24,6 @@ class Post < ApplicationRecord
     slug
   end
 
-  def to_param
-    slug
-  end
-
   def rendered_body
     markdown_renderer.render(body).html_safe
   end
