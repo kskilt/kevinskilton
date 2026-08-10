@@ -4,7 +4,7 @@ module RuboCop
   module Cop
     module Custom
       class TechnologyTags < Base
-        MSG = 'Technology tag `%<tag>s` is not registered in config/technology_pills.yml.'
+        MSG = "Technology tag `%<tag>s` is not registered in config/technology_pills.yml."
 
         def on_block(node)
           send_node, _args_node, body_node = *node
@@ -34,7 +34,7 @@ module RuboCop
         end
 
         def literal_tag(node)
-          return node.value if node.str_type? || node.sym_type?
+          node.value if node.str_type? || node.sym_type?
         end
 
         def allowed_tags

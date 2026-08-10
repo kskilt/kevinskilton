@@ -28,8 +28,8 @@ RSpec.describe Post, type: :model do
     let!(:published_post) { create(:post, status: :published, published_at: 1.day.ago) }
 
     it "includes published posts and excludes drafts" do
-      expect(Post.published).to contain_exactly(published_post)
-      expect(Post.published).not_to include(draft_post, future_draft_post)
+      expect(described_class.published).to contain_exactly(published_post)
+      expect(described_class.published).not_to include(draft_post, future_draft_post)
     end
   end
 
