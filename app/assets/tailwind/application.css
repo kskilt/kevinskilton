@@ -7,28 +7,32 @@
   font-weight: 600;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
+  color: #0f172a;
 }
 .rendered-body p, .rendered-body ul, .rendered-body ol {
   margin-bottom: 1em;
   line-height: 1.6;
+  color: #334155;
 }
 .rendered-body ul, .rendered-body ol {
   padding-left: 1.5em;
 }
 .rendered-body ul { list-style: disc; }
 .rendered-body ol { list-style: decimal; }
-.rendered-body a { color: #2563eb; text-decoration: underline; }
+.rendered-body a { color: #0e7490; text-decoration: underline; }
 .rendered-body code {
-  background: #f3f4f6;
+  background: rgba(15, 23, 42, 0.06);
   padding: 0.15em 0.35em;
   border-radius: 0.25em;
   font-size: 0.9em;
 }
+/* Code blocks stay dark intentionally — a deliberate callback to the old
+   dark theme this site flipped from, not an oversight. */
 .rendered-body pre {
-  background: #1f2937;
-  color: #e5e7eb;
+  background: #0f172a;
+  color: #e2e8f0;
   padding: 1em;
-  border-radius: 0.5em;
+  border-radius: 0.9em;
   overflow-x: auto;
   margin-bottom: 1em;
 }
@@ -41,6 +45,6 @@
   margin-bottom: 1em;
 }
 .rendered-body th, .rendered-body td {
-  border: 1px solid #d1d5db;
+  border: 1px solid rgba(15, 23, 42, 0.12);
   padding: 0.4em 0.8em;
 }
