@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Posts", type: :request do
   let!(:published_post) { create(:post, title: "Published", slug: "published-post", status: :published, published_at: 1.day.ago) }
-  let!(:draft_post) { create(:post, title: "Draft", slug: "draft-post", status: :draft, published_at: nil) }
+  let!(:draft_post) { create(:post, title: "Draft", slug: "draft-post", status: :draft, published_at: nil, body: "Secret draft content.") }
 
   describe "GET /blog" do
     it "renders published posts and hides drafts" do
@@ -11,6 +11,18 @@ RSpec.describe "Posts", type: :request do
       expect(response).to be_successful
       expect(response.body).to include(published_post.title)
       expect(response.body).not_to include(draft_post.title)
+    end
+  end
+
+  describe "GET /blog.rss" do
+    it "renders an RSS feed with published posts and hides drafts" do
+      get blog_rss_path
+
+      expect(response).to be_successful
+      expect(response.media_type).to eq("application/rss+xml")
+      expect(response.body).to include(published_post.title)
+      expect(response.body).not_to include(draft_post.title)
+      expect(response.body).not_to include(draft_post.body)
     end
   end
 

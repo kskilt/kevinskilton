@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   get "/blog", to: "posts#index", as: :blog
+  get "/blog.rss", to: "posts#index", as: :blog_rss, defaults: { format: :rss }
   get "/about", to: "pages#about", as: :about
   get "/agent-log", to: "pages#agent_log", as: :agent_log
   resources :posts, only: [ :show ], param: :slug
