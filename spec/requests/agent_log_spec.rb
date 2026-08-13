@@ -5,8 +5,11 @@ RSpec.describe "Agent Log", type: :request do
     get agent_log_path
 
     expect(response).to be_successful
-    expect(response.body).to include("A richer page for agentic UI delivery.")
-    expect(response.body).to include("Agent → Influencer → Team → User")
-    expect(response.body).to include("LinkedIn influencer")
+    expect(response.body).to include("Not a summary")
+    expect(response.body).to include("rails-locator")
+    expect(response.body).to include("scoped-implementer")
+    expect(response.body).to include("diff-validator")
+    expect(response.body).to include("You investigate a single, narrowly-stated question")
+    expect(response.body).to include('id="agent-log-data"')
   end
 end

@@ -1,89 +1,29 @@
-<% content_for :title, "Agentic Log — Kevin Skilton" %>
+<% content_for :title, "Agent Log — Kevin Skilton" %>
 
 <section class="hero-panel">
   <div class="hero-badges">
-    <span class="badge badge-cyan">Design + AI</span>
-    <span class="badge badge-slate">Product-focused</span>
-    <span class="badge badge-fuchsia">UI review</span>
+    <span class="badge badge-cyan">React</span>
+    <span class="badge badge-slate">Real agent definitions</span>
   </div>
 
-  <p class="section-kicker">Agentic design workflow</p>
-  <h1 class="hero-title">A richer page for agentic UI delivery.</h1>
-  <p class="hero-copy">The agentic log now includes a LinkedIn influencer role that reviews page feel, suggests UI polish, and shapes the product handoff before the team builds the final experience.</p>
-
-  <div class="hero-grid">
-    <div class="card-panel accent-card">
-      <p class="card-kicker">Influencer role</p>
-      <h2 class="card-title">Design guidance before code</h2>
-      <p class="card-copy">A design-focused agent aligns the interface with modern UI standards, recommending color, spacing, and typography improvements so the final page looks professional from the start.</p>
-      <div class="pill-row">
-        <span class="pill pill-cyan">Elevated spacing</span>
-        <span class="pill pill-fuchsia">Brand color</span>
-        <span class="pill pill-emerald">Content rhythm</span>
-      </div>
-    </div>
-
-    <div class="card-panel">
-      <p class="card-kicker">Visual polish</p>
-      <h3 class="card-title">Stronger contrast, structure, and motion</h3>
-      <p class="card-copy">The page now balances a confident dark brand palette with crisp cards and badge elements so the workflow feels curated, not generic.</p>
-    </div>
-  </div>
+  <p class="section-kicker">Agent workflow</p>
+  <h1 class="hero-title">Not a summary — the actual files.</h1>
+  <p class="hero-copy">This site's non-trivial changes go through a three-agent pipeline: a read-only locator investigates, an implementer builds from its handoff, and an independent validator reviews the diff. Below are the exact <code>.claude/agents/*.md</code> definitions that make that work, pulled live from this repo — not a description of them.</p>
 </section>
 
 <section class="content-panel">
   <div class="content-stack">
-    <p class="section-kicker">Flow</p>
-    <h2 class="panel-title">Agent → Influencer → Team → User</h2>
-    <p class="panel-copy">This workflow blends product signals with visual direction so the output is both functional and polished before it reaches production.</p>
+    <p class="section-kicker">Locate → Implement → Validate</p>
+    <h2 class="panel-title">rails-locator → scoped-implementer → diff-validator</h2>
   </div>
 
-  <div class="flow-grid">
-    <div class="card-panel small-card">
-      <span class="step-pill step-cyan">Step 1</span>
-      <h3 class="card-title">Intent captured</h3>
-      <p class="card-copy">A need, bug, or feature request becomes a clear product prompt.</p>
-    </div>
-
-    <div class="card-panel small-card">
-      <span class="step-pill step-fuchsia">Step 2</span>
-      <h3 class="card-title">Influencer review</h3>
-      <p class="card-copy">A design agent reviews color, spacing, and experience before the code is written.</p>
-    </div>
-
-    <div class="card-panel small-card">
-      <span class="step-pill step-emerald">Step 3</span>
-      <h3 class="card-title">Task generation</h3>
-      <p class="card-copy">The agent breaks work into tasks and routes it to the right contributors.</p>
-    </div>
-
-    <div class="card-panel small-card">
-      <span class="step-pill step-amber">Step 4</span>
-      <h3 class="card-title">Build and ship</h3>
-      <p class="card-copy">Developers implement the experience with the influencer’s visual direction in mind.</p>
-    </div>
+  <div id="agent-log-tabs">
+    <noscript>
+      <p class="panel-copy">JavaScript is disabled, so the tabbed viewer can't render. The raw files are readable directly in the repo under <code>.claude/agents/</code>.</p>
+    </noscript>
   </div>
 
-  <div class="note-box">
-    <div class="note-title">Design coordination</div>
-    <p>The influencer role keeps the experience consistent and polished at every handoff.</p>
-  </div>
-
-  <div class="info-grid">
-    <div class="card-panel">
-      <p class="card-kicker">Design signal</p>
-      <h3 class="card-title">Feedback before code</h3>
-      <p class="card-copy">The influencer defines whether the page feels intuitive and modern before implementation begins.</p>
-    </div>
-    <div class="card-panel">
-      <p class="card-kicker">Visual rhythm</p>
-      <h3 class="card-title">Hierarchy and polish</h3>
-      <p class="card-copy">Spacing, typography, and color choices are guided by design review.</p>
-    </div>
-    <div class="card-panel">
-      <p class="card-kicker">Production quality</p>
-      <h3 class="card-title">Refined handoff</h3>
-      <p class="card-copy">Every release is reviewed for visual impact and clarity before it reaches the user.</p>
-    </div>
-  </div>
+  <script type="application/json" id="agent-log-data"><%= raw(@agent_files.to_json) %></script>
 </section>
+
+<%= javascript_include_tag "agent_log", type: "module", defer: true %>
