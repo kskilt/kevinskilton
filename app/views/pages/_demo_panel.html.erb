@@ -1,0 +1,11 @@
+<div id="demo-panel">
+  <div class="hero-badges" role="tablist" aria-label="Code example sections">
+    <%= link_to "The story", demo_path(tab: "story"), data: { turbo_stream: true }, role: "tab", "aria-selected": @tab == "story", class: "badge #{@tab == "story" ? "demo-tab-active" : "demo-tab-inactive"}" %>
+    <%= link_to "Working demo", demo_path(tab: "working_demo"), data: { turbo_stream: true }, role: "tab", "aria-selected": @tab == "working_demo", class: "badge #{@tab == "working_demo" ? "demo-tab-active" : "demo-tab-inactive"}" %>
+    <%= link_to "The code", demo_path(tab: "code"), data: { turbo_stream: true }, role: "tab", "aria-selected": @tab == "code", class: "badge #{@tab == "code" ? "demo-tab-active" : "demo-tab-inactive"}" %>
+  </div>
+
+  <div class="content-stack">
+    <%= render "pages/demo_tabs/#{@tab}" %>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<p class="card-kicker">1. Two lists, not one</p>
+<p class="panel-copy">
+  <code>KNOWN_MODELS</code> is every model the client code can call at all — appending is safe, reordering existing entries isn't, since this backs a Rails <code>enum</code>. A new model has to land here before it can appear anywhere, including the dropdown. <code>RESTRICTED_MODELS</code> is a much smaller, separate list: models we know about but don't want users picking anymore. What actually shows up in the UI is one minus the other. The default lives in one constant, not as a repeated string — the enum and the test factory below both point at <code>DEFAULT_AI_MODEL</code>, so changing the default later can't accidentally leave one of them behind.
+</p>
+<%= render "pages/diff_file", diff_file: @code_diffs[0] %>
+
+<p class="card-kicker">2. Letting the pick actually save</p>
+<p class="panel-copy">
+  The dropdown doesn't matter if the selected value never reaches the record. This is the entire reason a user's pick sticks — one attribute added to the permitted params.
+</p>
+<%= render "pages/diff_file", diff_file: @code_diffs[1] %>
+
+<p class="card-kicker">3. Per-model request quirks</p>
+<p class="panel-copy">
+  This is the other end of the flow: once <code>assistant.model</code> is saved, this is what reads it back and reacts to it. GPT-5+ rejects <code>temperature</code> outright; one model needs an explicit reasoning-effort override. The dropdown was easy — this part is why it wasn't just a dropdown.
+</p>
+<%= render "pages/diff_file", diff_file: @code_diffs[2] %>
+
+<p class="card-kicker">4. A blocklist, not a whitelist</p>
+<p class="panel-copy">
+  This only stops a save from reverting to one of the specific models in <code>RESTRICTED_MODELS</code>, through the normal save path. It was never trying to validate "is this a real model" in general — that's already handled by the model having to exist in <code>KNOWN_MODELS</code> in the first place.
+</p>
+<%= render "pages/diff_file", diff_file: @code_diffs[3] %>
+
+<p class="card-kicker">5. One line in an existing factory</p>
+<p class="panel-copy">
+  The specs below build a <code>ChatAssistant</code> through this factory, so it needed a default model too. It points at <code>DEFAULT_AI_MODEL</code> rather than repeating the string "gpt-5.4" — if the default ever changes, the factory follows automatically instead of quietly testing against a stale value.
+</p>
+<%= render "pages/diff_file", diff_file: @code_diffs[4] %>
+
+<p class="card-kicker">6. Proving it</p>
+<p class="panel-copy">
+  The temperature quirk and the validation tradeoff are exactly the kind of thing that regresses silently if nothing's watching it. The <code>context</code> nesting here isn't incidental — it mirrors the two conditionals in <code>build_request</code> directly: one branch for whether temperature survives, a branch nested inside it for whether reasoning-effort gets forced. Read top to bottom, it's a flowchart of the method, not just a list of assertions.
+</p>
+<%= render "pages/diff_file", diff_file: @code_diffs[5] %>

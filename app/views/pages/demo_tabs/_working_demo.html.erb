@@ -1,0 +1,49 @@
+<p class="card-kicker">Try it</p>
+<p class="panel-copy">
+  This mirrors the real settings table. Edit the prompt or switch models — the console output below shows the actual request shape changing.
+</p>
+
+<%= form_with url: demo_path, method: :get, data: { turbo_stream: true } do |f| %>
+  <%= f.hidden_field :tab, value: "working_demo" %>
+  <table class="settings-table">
+    <thead>
+      <tr>
+        <th>Channel</th>
+        <th>Prompt</th>
+        <th>Attached file</th>
+        <th>Model</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>#product-questions</td>
+        <td>
+          <%= f.label :prompt, "Prompt", class: "sr-only" %>
+          <%= f.text_area :prompt,
+                value: @prompt,
+                rows: 2,
+                maxlength: PagesController::DEMO_PROMPT_MAX_LENGTH,
+                onchange: "this.form.requestSubmit()" %>
+        </td>
+        <td><span class="file-chip">📎 <%= DemoRequestPreview::FAKE_FILE_ID %></span></td>
+        <td>
+          <%= f.label :model, "Model", class: "sr-only" %>
+          <div class="model-highlight">
+            <%= f.select :model,
+                  DemoModelCatalog.options_for_select,
+                  { selected: @selected_model.id },
+                  onchange: "this.form.requestSubmit()" %>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<div class="console-output">
+  <div class="console-output-header">rails console</div>
+  <pre><code><span class="console-prompt">&gt;&gt;</span> PromptBuilder.new(assistant).build_request
+<span class="console-prompt">=&gt;</span> {
+<% @request_preview.lines.each do |line| %>  <%= line %>
+<% end %>}</code></pre>
+</div>

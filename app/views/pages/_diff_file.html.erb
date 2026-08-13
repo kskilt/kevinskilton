@@ -1,0 +1,18 @@
+<div class="diff-file">
+  <div class="diff-file-header">
+    <span class="diff-file-name"><%= diff_file.filename %></span>
+    <span class="diff-file-stat diff-stat-add">+<%= diff_file.additions %></span>
+    <% if diff_file.removals.positive? %>
+      <span class="diff-file-stat diff-stat-remove">-<%= diff_file.removals %></span>
+    <% end %>
+  </div>
+  <table class="diff-table">
+    <% diff_file.lines.each do |line| %>
+      <tr class="diff-line diff-line-<%= line.type %>">
+        <td class="diff-gutter"><%= line.number %></td>
+        <td class="diff-marker"><%= { add: "+", remove: "-", context: " " }[line.type] %></td>
+        <td class="diff-code"><%= line.content %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

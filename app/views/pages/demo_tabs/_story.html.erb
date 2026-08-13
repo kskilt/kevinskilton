@@ -1,0 +1,24 @@
+<p class="card-kicker">Why</p>
+<p class="panel-copy">
+  An AI-Assistant feature I work on lets users chat with an Assistant with a hardcoded model version. Every time someone wanted to try a different GPT model — cheaper, faster, better at a specific task — it took a developer and a deploy. Users wanted the freedom to experiment; the team wanted that experimentation to stay safe.
+</p>
+
+<p class="card-kicker">What I built</p>
+<p class="panel-copy">
+  A model-selection dropdown on the assistant's settings, backed by a small, deliberately curated list — not every model OpenAI has ever shipped, just the ones we'd actually verified work with our product. Switching between any of those verified models became a form field, not a deploy. Getting a brand-new model onto that list in the first place is still a small, deliberate code change — that gate didn't go away, and it shouldn't have.
+</p>
+
+<p class="card-kicker">The wrinkle that made it more than a dropdown</p>
+<p class="panel-copy">
+  Newer models don't play by the same rules as older ones. GPT-5 and later reject the <code>temperature</code> parameter outright — a request that included it for GPT-4 just errors out on GPT-5. One specific model needed an explicit "reasoning effort: none" flag to behave like the others. The dropdown was easy. Making every model actually work once selected was the real work.
+</p>
+
+<p class="card-kicker">The tradeoff</p>
+<p class="panel-copy">
+  There are really two lists here: every model the client code knows how to call at all, and a smaller one — subtracted from the first — for what's safe to hand to users. The team went back and forth on whether picking a value from outside that safe list should be blocked at the database level. Blocking it protects the product — we'd already had a case where an unvetted new model silently broke response parsing in production. But blocking too aggressively would also stop an engineer from testing a brand-new model by hand, before it's ready for anyone else. We landed on validating changes made through the normal save path — the form — while leaving direct testing untouched. Not the "safest" possible answer — the right one for how the team actually works.
+</p>
+
+<div class="note-box">
+  <div class="note-title">The value, precisely</div>
+  <p>Switching to any model already on the verified list is now self-service — no developer, no deploy. Bringing a brand-new model onto that list still takes a small, deliberate code change, and that's by design: it's the same gate that would have caught the model that broke production parsing before it ever reached a user.</p>
+</div>

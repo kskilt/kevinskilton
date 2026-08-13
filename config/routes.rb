@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/blog.rss", to: "posts#index", as: :blog_rss, defaults: { format: :rss }
   get "/about", to: "pages#about", as: :about
   get "/agent-log", to: "pages#agent_log", as: :agent_log
+  get "/demo", to: "pages#demo", as: :demo
   resources :posts, only: [ :show ], param: :slug
 
   # Defines the root path route ("/")

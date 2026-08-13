@@ -9,7 +9,7 @@
 
 body {
   margin: 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 55%, #e0e7ff 100%);
+  background: linear-gradient(135deg, #eff6ff 0%, #ede9fe 55%, #fce7f3 100%);
   color: #0f172a;
   line-height: 1.6;
 }
@@ -24,8 +24,8 @@ a {
 }
 
 .site-header {
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(19, 78, 74, 0.94);
   backdrop-filter: blur(16px);
   position: sticky;
   top: 0;
@@ -46,19 +46,19 @@ a {
   font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: #0f172a;
+  color: #ffffff;
 }
 
 .site-nav {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  color: #475569;
+  color: #99f6e4;
   font-size: 0.95rem;
 }
 
 .site-nav a:hover {
-  color: #0e7490;
+  color: #ffffff;
 }
 
 .page-content {
@@ -78,7 +78,7 @@ a {
 }
 
 .hero-panel {
-  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 45%, #dbeafe 100%);
+  background: linear-gradient(135deg, #e0f2fe 0%, #ede9fe 50%, #fae8ff 100%);
   color: #0f172a;
 }
 
@@ -119,6 +119,17 @@ a {
   color: #334155;
 }
 
+.demo-tab-inactive {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.demo-tab-active {
+  background: #ffffff;
+  color: #6d28d9;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.14);
+}
+
 .badge-fuchsia,
 .pill-fuchsia,
 .step-fuchsia {
@@ -140,7 +151,7 @@ a {
 .section-kicker,
 .card-kicker {
   margin: 0 0 0.35rem;
-  color: #0e7490;
+  color: #6d28d9;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.28em;
@@ -160,7 +171,7 @@ a {
 .card-copy,
 .note-box p {
   margin: 0;
-  color: #475569;
+  color: #334155;
   font-size: 1rem;
   line-height: 1.75;
 }
@@ -181,8 +192,8 @@ a {
 }
 
 .accent-card {
-  border-color: rgba(6, 182, 212, 0.35);
-  box-shadow: 0 16px 40px rgba(6, 182, 212, 0.12);
+  border-color: rgba(109, 40, 217, 0.35);
+  box-shadow: 0 16px 40px rgba(109, 40, 217, 0.12);
 }
 
 .card-title {
@@ -211,8 +222,8 @@ a {
   margin: 1.2rem 0 1.35rem;
   padding: 1rem 1.1rem;
   border-radius: 1.1rem;
-  background: #eef2ff;
-  border: 1px solid rgba(79, 70, 229, 0.14);
+  background: #f5f3ff;
+  border: 1px solid rgba(109, 40, 217, 0.14);
 }
 
 .note-title {
@@ -244,7 +255,7 @@ a {
 .marker-list li {
   position: relative;
   padding-left: 1.3rem;
-  color: #475569;
+  color: #334155;
   line-height: 1.7;
 }
 
@@ -256,7 +267,185 @@ a {
   width: 0.4rem;
   height: 0.4rem;
   border-radius: 999px;
-  background: #0e7490;
+  background: #6d28d9;
+}
+
+.settings-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.85rem;
+  font-size: 0.88rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.settings-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #475569;
+}
+
+.settings-table td {
+  padding: 0.75rem;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  vertical-align: top;
+}
+
+.settings-table textarea,
+.settings-table select {
+  width: 100%;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: #0f172a;
+  background: #ffffff;
+}
+
+.file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(15, 23, 42, 0.06);
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.model-highlight {
+  display: inline-block;
+  border: 2px solid #dc2626;
+  border-radius: 0.65rem;
+  padding: 0.2rem;
+}
+
+.console-output {
+  margin-top: 1.1rem;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.console-output-header {
+  background: #1e293b;
+  color: #94a3b8;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  padding: 0.5rem 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.console-output pre {
+  margin: 0;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1rem;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  overflow-x: auto;
+}
+
+.console-prompt {
+  color: #5eead4;
+}
+
+.diff-file {
+  border: 1px solid #d0d7de;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  background: #ffffff;
+}
+
+.diff-file-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  background: #f6f8fa;
+  border-bottom: 1px solid #d0d7de;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  color: #24292f;
+}
+
+.diff-file-name {
+  flex: 1;
+  font-weight: 600;
+}
+
+.diff-file-stat {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.diff-stat-add {
+  color: #1a7f37;
+}
+
+.diff-stat-remove {
+  color: #cf222e;
+  margin-left: 0.35rem;
+}
+
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.diff-gutter {
+  width: 2.75rem;
+  padding: 0 0.5rem;
+  text-align: right;
+  color: #8c959f;
+  user-select: none;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.diff-marker {
+  width: 1.25rem;
+  text-align: center;
+  user-select: none;
+  vertical-align: top;
+  color: #8c959f;
+}
+
+.diff-code {
+  padding: 0 0.75rem 0 0.25rem;
+  white-space: pre;
+  color: #24292f;
+}
+
+.diff-line-add {
+  background: #e6ffec;
+}
+
+.diff-line-add .diff-marker {
+  color: #1a7f37;
+}
+
+.diff-line-remove {
+  background: #ffebe9;
+}
+
+.diff-line-remove .diff-marker {
+  color: #cf222e;
 }
 
 @media (max-width: 900px) {

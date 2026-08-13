@@ -20,7 +20,7 @@
 }
 .rendered-body ul { list-style: disc; }
 .rendered-body ol { list-style: decimal; }
-.rendered-body a { color: #0e7490; text-decoration: underline; }
+.rendered-body a { color: #6d28d9; text-decoration: underline; }
 .rendered-body code {
   background: rgba(15, 23, 42, 0.06);
   padding: 0.15em 0.35em;
