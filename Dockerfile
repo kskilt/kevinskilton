@@ -35,6 +35,12 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libffi-dev libvips libyaml-dev pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
+# Install Node.js — only needed in this throw-away build stage, to bundle the
+# agent-log page's React component with esbuild during assets:precompile.
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install --no-install-recommends -y nodejs && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
 # Install application gems
 COPY vendor/* ./vendor/
 COPY Gemfile Gemfile.lock ./
@@ -43,6 +49,10 @@ RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     # -j 1 disable parallel compilation to avoid a QEMU bug: https://github.com/rails/bootsnap/issues/495
     bundle exec bootsnap precompile -j 1 --gemfile
+
+# Install JS dependencies (react, react-dom, esbuild) for the agent-log bundle
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # Copy application code
 COPY . .

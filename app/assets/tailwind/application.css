@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../../javascript/**/*.jsx";
 
 /* Minimal styling for Markdown-rendered post bodies. Kept as plain CSS rather
    than pulling in the Tailwind Typography plugin, to avoid an extra JS/build

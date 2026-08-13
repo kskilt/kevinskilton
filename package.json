@@ -1,0 +1,14 @@
+{
+  "name": "kevinskilton",
+  "private": true,
+  "scripts": {
+    "build:agent-log": "esbuild app/javascript/agent_log/entry.jsx --bundle --minify --jsx=automatic --outfile=app/assets/builds/agent_log.js"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
