@@ -74,11 +74,7 @@ class DemoCodeDiffs
         [ :add, "  validates :model," ],
         [ :add, "    exclusion: { in: RESTRICTED_MODELS }," ],
         [ :add, "    if: :will_save_change_to_model?" ],
-        [ :add, "  # A blocklist, not a whitelist: only stops a save from reverting to one" ],
-        [ :add, "  # of the specific models above, on the normal save path (e.g. the form)." ],
-        [ :add, "  # It doesn't stop testing a new model by hand — that model still has to" ],
-        [ :add, "  # exist in KNOWN_MODELS before this code (or the enum) even sees it as" ],
-        [ :add, "  # a legal value at all." ],
+        [ :add, "  # Blocklist, not whitelist: only guards a few known-deprecated models." ],
         [ :context, "end" ]
       ]),
 
@@ -139,17 +135,19 @@ class DemoCodeDiffs
         [ :add, "      end" ],
         [ :add, "    end" ],
         [ :add, "  end" ],
-        [ :add, "end" ],
-        [ :add, "" ],
+        [ :add, "end" ]
+      ]),
+
+      DemoDiffFile.new("spec/models/chat_assistant_spec.rb", [
         [ :add, "RSpec.describe ChatAssistant do" ],
-        [ :add, "  it \"rejects a restricted model when the model actually changes\" do" ],
-        [ :add, "    assistant = build(:chat_assistant, model: \"gpt-4\")" ],
+        [ :add, "  it { is_expected.to validate_presence_of(:instructions).allow_nil }" ],
+        [ :add, "  it { is_expected.to define_enum_for(:model).with_values(described_class::KNOWN_MODELS.keys) }" ],
+        [ :add, "  it { is_expected.to validate_exclusion_of(:model).in_array(described_class::RESTRICTED_MODELS) }" ],
         [ :add, "" ],
-        [ :add, "    expect(assistant).not_to be_valid" ],
-        [ :add, "  end" ],
-        [ :add, "" ],
-        [ :add, "  it \"excludes restricted models from the selectable list\" do" ],
-        [ :add, "    expect(described_class.selectable_models).not_to include(\"gpt-4\")" ],
+        [ :add, "  describe \".selectable_models\" do" ],
+        [ :add, "    it \"excludes restricted models\" do" ],
+        [ :add, "      expect(described_class.selectable_models).not_to include(\"gpt-4\")" ],
+        [ :add, "    end" ],
         [ :add, "  end" ],
         [ :add, "end" ]
       ])

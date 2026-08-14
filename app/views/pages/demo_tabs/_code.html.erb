@@ -33,3 +33,9 @@
   The temperature quirk and the validation tradeoff are exactly the kind of thing that regresses silently if nothing's watching it. The <code>context</code> nesting here isn't incidental — it mirrors the two conditionals in <code>build_request</code> directly: one branch for whether temperature survives, a branch nested inside it for whether reasoning-effort gets forced. Read top to bottom, it's a flowchart of the method, not just a list of assertions.
 </p>
 <%= render "pages/diff_file", diff_file: @code_diffs[5] %>
+
+<p class="card-kicker">7. The known attributes, checked the boring way</p>
+<p class="panel-copy">
+  <code>ChatAssistant</code>'s own spec, in its own file this time. Presence, the enum, and the exclusion list are all standard shoulda-matchers one-liners — no reason to hand-roll what a matcher already says clearly.
+</p>
+<%= render "pages/diff_file", diff_file: @code_diffs[6] %>
