@@ -8,7 +8,7 @@ jobs:
     name: Seed production database
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: |
           MACHINE_ID=$(flyctl machines list -a kevinskilton --json | jq -r '.[0].id')
