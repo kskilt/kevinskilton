@@ -1,14 +1,16 @@
 <% content_for :title, "Agent Log — Kevin Skilton" %>
 
 <section class="hero-panel">
-  <div class="hero-badges">
-    <span class="badge badge-cyan">React</span>
-    <span class="badge badge-slate">Real agent definitions</span>
-  </div>
+  <div class="hero-main">
+    <div class="hero-badges">
+      <span class="badge badge-slate">Real agent definitions</span>
+    </div>
 
-  <p class="section-kicker">Agent workflow</p>
-  <h1 class="hero-title">Not a summary — the actual files.</h1>
-  <p class="hero-copy">This site's non-trivial changes go through a three-agent pipeline: a read-only locator investigates, an implementer builds from its handoff, and an independent validator reviews the diff. Below are the exact <code>.claude/agents/*.md</code> definitions that make that work, pulled live from this repo — not a description of them.</p>
+    <p class="section-kicker">Agent workflow</p>
+    <h1 class="hero-title">Not a summary — the actual files.</h1>
+    <p class="hero-copy">This site's non-trivial changes go through a three-agent pipeline: a read-only locator investigates, an implementer builds from its handoff, and an independent validator reviews the diff. Below are the exact <code>.claude/agents/*.md</code> definitions that make that work, pulled live from this repo — not a description of them.</p>
+  </div>
+  <%= render "shared/built_with", technologies: [ "React 19", "esbuild", "Tailwind" ] %>
 </section>
 
 <section class="content-panel">

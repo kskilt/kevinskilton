@@ -1,0 +1,12 @@
+<% technologies = Array(technologies) %>
+<% if technologies.any? %>
+  <% pill_colors = %w[cyan fuchsia emerald amber slate] %>
+  <div class="built-with">
+    <p class="built-with-label">This page was made using:</p>
+    <div class="built-with-pills">
+      <% technologies.each_with_index do |tech, index| %>
+        <span class="pill pill-<%= pill_colors[index % pill_colors.size] %>"><%= tech %></span>
+      <% end %>
+    </div>
+  </div>
+<% end %>

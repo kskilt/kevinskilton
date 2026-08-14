@@ -1,21 +1,24 @@
 <% content_for :title, "#{@post.title} — Kevin Skilton" %>
 
 <article class="hero-panel">
-  <div class="hero-badges">
-    <%= link_to "← All posts", blog_path, class: "badge badge-slate" %>
-    <%= render_technology_pills(@post) %>
+  <div class="hero-main">
+    <div class="hero-badges">
+      <%= link_to "← All posts", blog_path, class: "badge badge-slate" %>
+      <%= render_technology_pills(@post) %>
+    </div>
+
+    <h1 class="hero-title"><%= @post.title %></h1>
+
+    <p class="hero-copy">
+      <%= @post.published_at.strftime("%B %-d, %Y") %>
+      <% if @post.category.present? %>
+        &middot; <%= @post.category %>
+      <% end %>
+    </p>
+
+    <div class="rendered-body">
+      <%= @post.rendered_body %>
+    </div>
   </div>
-
-  <h1 class="hero-title"><%= @post.title %></h1>
-
-  <p class="hero-copy">
-    <%= @post.published_at.strftime("%B %-d, %Y") %>
-    <% if @post.category.present? %>
-      &middot; <%= @post.category %>
-    <% end %>
-  </p>
-
-  <div class="rendered-body">
-    <%= @post.rendered_body %>
-  </div>
+  <%= render "shared/built_with", technologies: [ "Rails 8", "Redcarpet", "Tailwind" ] %>
 </article>

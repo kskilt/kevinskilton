@@ -1,11 +1,14 @@
 <% content_for :title, "Blog — Kevin Skilton" %>
 
 <section class="hero-panel">
-  <div class="hero-badges">
-    <p class="section-kicker">Blog</p>
+  <div class="hero-main">
+    <div class="hero-badges">
+      <p class="section-kicker">Blog</p>
+    </div>
+    <h1 class="hero-title">Recent thinking and shipping notes.</h1>
+    <p class="hero-copy">Browse the latest posts about software, product decisions, and the stack behind what I build.</p>
   </div>
-  <h1 class="hero-title">Recent thinking and shipping notes.</h1>
-  <p class="hero-copy">Browse the latest posts about software, product decisions, and the stack behind what I build.</p>
+  <%= render "shared/built_with", technologies: [ "Rails 8", "Tailwind" ] %>
 </section>
 
 <div class="content-stack">

@@ -1,14 +1,17 @@
 <% content_for :title, "About Kevin Skilton" %>
 
 <section class="hero-panel">
-  <p class="section-kicker">About Kevin</p>
-  <h1 class="hero-title">A builder who'd rather verify something works than trust that it sounds like it does.</h1>
-  <p class="hero-copy">I'm a Rails engineer who spends a lot of time on how software actually behaves under real use, not just how it reads in a diff. Outside of work, that same instinct shows up in $10 hardware projects that take a lot longer than they should.</p>
-  <div class="hero-badges">
-    <a href="https://www.linkedin.com/in/kskilt" target="_blank" rel="noopener" class="badge badge-cyan">LinkedIn</a>
-    <a href="https://github.com/kskilt" target="_blank" rel="noopener" class="badge badge-slate">GitHub</a>
-    <span class="badge badge-fuchsia">Rails · Ruby · product engineering</span>
+  <div class="hero-main">
+    <p class="section-kicker">About Kevin</p>
+    <h1 class="hero-title">A builder who'd rather verify something works than trust that it sounds like it does.</h1>
+    <p class="hero-copy">I'm a Rails engineer who spends a lot of time on how software actually behaves under real use, not just how it reads in a diff. Outside of work, that same instinct shows up in $10 hardware projects that take a lot longer than they should.</p>
+    <div class="hero-badges">
+      <a href="https://www.linkedin.com/in/kskilt" target="_blank" rel="noopener" class="badge badge-cyan">LinkedIn</a>
+      <a href="https://github.com/kskilt" target="_blank" rel="noopener" class="badge badge-slate">GitHub</a>
+      <span class="badge badge-fuchsia">Rails · Ruby · product engineering</span>
+    </div>
   </div>
+  <%= render "shared/built_with", technologies: [ "Rails 8", "Tailwind" ] %>
 </section>
 
 <section class="content-panel">

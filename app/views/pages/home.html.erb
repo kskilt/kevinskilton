@@ -1,14 +1,16 @@
 <% content_for :title, "Kevin Skilton" %>
 
 <section class="hero-panel">
-  <p class="section-kicker">Kevin Skilton</p>
-  <h1 class="hero-title">Shipping ideas, code, and a better dev experience.</h1>
-  <p class="hero-copy">This site is a record of the tools, patterns, and launches I care about. Read the blog for project writeups, product lessons, and the implementation details behind what I build.</p>
+  <div class="hero-main">
+    <p class="section-kicker">Kevin Skilton</p>
+    <h1 class="hero-title">Shipping ideas, code, and a better dev experience.</h1>
+    <p class="hero-copy">This site is a record of the tools, patterns, and launches I care about. Read the blog for project writeups, product lessons, and the implementation details behind what I build.</p>
 
-  <div class="hero-badges">
-    <%= link_to "Explore the blog", blog_path, class: "badge badge-cyan" %>
-    <span class="badge badge-slate">Built with Rails, Hotwire, and a bit of markdown.</span>
+    <div class="hero-badges">
+      <%= link_to "Explore the blog", blog_path, class: "badge badge-cyan" %>
+    </div>
   </div>
+  <%= render "shared/built_with", technologies: [ "Rails 8", "Hotwire", "Tailwind" ] %>
 </section>
 
 <% if @recent_posts.any? %>
