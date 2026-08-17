@@ -14,5 +14,5 @@ jobs:
       - run: gem install selenium-webdriver
       - run: ruby bin/scrape_mtg_meta
         env:
-          MTG_INGEST_URL: "https://kevinskilton.com/internal/mtg_rankings"
+          MTG_INGEST_URL: "https://kevinskilton.fly.dev/internal/mtg_rankings"
           MTG_INGEST_TOKEN: ${{ secrets.MTG_INGEST_TOKEN }}
