@@ -23,6 +23,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def hobbies
+    @decks = MtgDeck.ranked
+  end
+
   def demo
     @tab = DEMO_TABS.include?(params[:tab]) ? params[:tab] : "story"
     @selected_model = DemoModelCatalog.find(params[:model])

@@ -1,0 +1,128 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Standalone scraper: renders Untapped.gg's public Standard BO1 meta overview with
+# headless Chrome and POSTs the resulting archetype rankings to this app's
+# token-authenticated ingestion endpoint.
+#
+# Deliberately NOT run via `bundle exec` and NOT dependent on the Rails app's
+# Gemfile — it only needs `selenium-webdriver` and the Ruby standard library.
+# This keeps Selenium/Chrome entirely out of the production dependency graph;
+# this script only ever runs from the scheduled GitHub Actions workflow.
+
+require "selenium-webdriver"
+require "net/http"
+require "json"
+require "uri"
+
+META_URL = "https://mtga.untapped.gg/constructed/standard/meta"
+
+def render_page_text
+  options = Selenium::WebDriver::Options.chrome
+  options.add_argument("--headless=new")
+  options.add_argument("--disable-gpu")
+  options.add_argument("--disable-dev-shm-usage")
+  options.add_argument("--window-size=1400,2000")
+  options.page_load_strategy = :eager
+
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.open_timeout = 30
+  client.read_timeout = 30
+
+  driver = Selenium::WebDriver.for(:chrome, options: options, http_client: client)
+
+  begin
+    driver.manage.timeouts.page_load = 20
+    begin
+      driver.navigate.to(META_URL)
+    rescue Selenium::WebDriver::Error::TimeoutError
+      # The page keeps a long-lived connection open after the content we need
+      # has rendered, so :eager + a short page_load timeout can still raise
+      # here even on a successful load. Fall through and read the DOM anyway.
+    end
+    sleep 6 # allow the client-rendered leaderboard to populate
+    driver.execute_script("return document.body.innerText")
+  ensure
+    driver.quit
+  end
+end
+
+# The page renders two separate leaderboards as flat text:
+#   Winrate Today
+#   #1
+#   Jeskai Artifacts
+#   58.3%
+#   #2
+#   ...
+#   Popularity Today
+#   #1
+#   Mono-White Auras
+#   17.3%
+#   ...
+# Each list ranks by a single metric — they are not paired win/popularity
+# rows for the same archetype. Only archetypes appearing in BOTH lists are
+# ingested, since win_rate and popularity are both required fields; this
+# avoids fabricating a metric for an archetype that didn't rank in one list.
+def extract_leaderboard(lines, heading, stop_headings)
+  start = lines.index(heading)
+  return {} unless start
+
+  values = {}
+  index = start + 1
+  while index < lines.length
+    line = lines[index]
+    break if stop_headings.include?(line)
+
+    if line.match?(/\A#\d+\z/)
+      name = lines[index + 1]
+      percent = lines[index + 2]
+      if name && percent&.match?(/\A\d+(\.\d+)?%\z/)
+        values[name] = percent.delete("%").to_f
+        index += 3
+        next
+      end
+    end
+
+    index += 1
+  end
+  values
+end
+
+def parse_archetypes(page_text)
+  lines = page_text.to_s.lines.map(&:strip).reject(&:empty?)
+
+  win_rates = extract_leaderboard(lines, "Winrate Today", [ "Popularity Today" ])
+  popularity = extract_leaderboard(lines, "Popularity Today", [ "Popularity Over Time", "Winrate Over Time" ])
+
+  (win_rates.keys & popularity.keys).map do |name|
+    { archetype_name: name, win_rate: win_rates[name], popularity: popularity[name] }
+  end
+end
+
+def post_rankings(archetypes)
+  uri = URI.parse(ENV.fetch("MTG_INGEST_URL"))
+  request = Net::HTTP::Post.new(uri)
+  request["Authorization"] = "Bearer #{ENV.fetch("MTG_INGEST_TOKEN")}"
+  request["Content-Type"] = "application/json"
+  request.body = { decks: archetypes }.to_json
+
+  response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
+    http.request(request)
+  end
+
+  unless response.is_a?(Net::HTTPSuccess)
+    warn "Ingestion request failed: #{response.code} #{response.body}"
+    exit 1
+  end
+end
+
+page_text = render_page_text
+archetypes = parse_archetypes(page_text)
+
+if archetypes.empty?
+  warn "No archetypes parsed from the rendered page — refusing to ingest empty/garbage data."
+  exit 1
+end
+
+post_rankings(archetypes)
+puts "Ingested #{archetypes.size} archetypes."

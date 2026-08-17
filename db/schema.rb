@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_05_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_17_170931) do
+  create_table "mtg_decks", force: :cascade do |t|
+    t.string "archetype_name", null: false
+    t.datetime "created_at", null: false
+    t.decimal "popularity", precision: 5, scale: 2, null: false
+    t.datetime "scraped_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "win_rate", precision: 5, scale: 2, null: false
+    t.index ["archetype_name"], name: "index_mtg_decks_on_archetype_name", unique: true
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text "body", null: false
     t.string "category"

@@ -14,7 +14,12 @@ Rails.application.routes.draw do
   get "/about", to: "pages#about", as: :about
   get "/agent-log", to: "pages#agent_log", as: :agent_log
   get "/demo", to: "pages#demo", as: :demo
+  get "/hobbies", to: "pages#hobbies", as: :hobbies
   resources :posts, only: [ :show ], param: :slug
+
+  namespace :internal do
+    post "mtg_rankings", to: "mtg_rankings#create"
+  end
 
   # Defines the root path route ("/")
   root "pages#home"

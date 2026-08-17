@@ -18,4 +18,24 @@ RSpec.describe "Pages", type: :request do
     expect(response.body).to include("linkedin.com/in/kskilt")
     expect(response.body).to include("rather verify something works than trust that it sounds like it does")
   end
+
+  describe "GET /hobbies" do
+    it "renders ranked archetypes by win rate descending" do
+      low_win_rate_deck = create(:mtg_deck, archetype_name: "Mono Red Aggro", win_rate: 45.0)
+      high_win_rate_deck = create(:mtg_deck, archetype_name: "Azorius Control", win_rate: 58.2)
+
+      get hobbies_path
+
+      expect(response).to be_successful
+      expect(response.body.index(high_win_rate_deck.archetype_name))
+        .to be < response.body.index(low_win_rate_deck.archetype_name)
+    end
+
+    it "shows a fallback message when no rankings have been scraped yet" do
+      get hobbies_path
+
+      expect(response).to be_successful
+      expect(response.body).to include("Rankings haven't been scraped yet")
+    end
+  end
 end

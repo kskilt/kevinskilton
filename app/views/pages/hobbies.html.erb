@@ -1,0 +1,42 @@
+<% content_for :title, "Hobbies — Kevin Skilton" %>
+
+<section class="hero-panel">
+  <div class="hero-main">
+    <p class="section-kicker">Hobbies</p>
+    <h1 class="hero-title">MTG Arena Standard BO1 deck rankings.</h1>
+    <p class="hero-copy">I'm a fairly serious Magic: The Gathering nerd, so this page tracks the current Standard BO1 metagame on MTG Arena — archetype win rate and popularity, scraped periodically from <%= link_to "Untapped.gg", "https://mtga.untapped.gg/constructed/standard/meta", target: "_blank", rel: "noopener" %>'s public meta overview.</p>
+  </div>
+  <%= render "shared/built_with", technologies: [ "Rails 8", "GitHub Actions", "Selenium" ] %>
+</section>
+
+<section class="content-panel">
+  <div class="content-stack">
+    <p class="section-kicker">Standard metagame</p>
+    <h2 class="panel-title">Ranked by win rate</h2>
+
+    <% if @decks.empty? %>
+      <p class="panel-copy">Rankings haven't been scraped yet.</p>
+    <% else %>
+      <p class="panel-copy">Last updated: <%= @decks.map(&:scraped_at).max.strftime("%B %-d, %Y %H:%M %Z") %></p>
+
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th>Archetype</th>
+            <th>Win rate</th>
+            <th>Popularity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @decks.each do |deck| %>
+            <tr>
+              <td><%= deck.archetype_name %></td>
+              <td><%= number_with_precision(deck.win_rate, precision: 1) %>%</td>
+              <td><%= number_with_precision(deck.popularity, precision: 1) %>%</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</section>
