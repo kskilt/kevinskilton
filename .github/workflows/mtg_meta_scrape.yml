@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: gem install selenium-webdriver
+      - run: sudo gem install selenium-webdriver
       - run: ruby bin/scrape_mtg_meta
         env:
           MTG_INGEST_URL: "https://kevinskilton.fly.dev/internal/mtg_rankings"
